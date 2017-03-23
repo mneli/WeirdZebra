@@ -44,4 +44,18 @@ public class Reserve {
     public Animal getAnimal(Coordinates pos) {
         return this.animals[pos.getRow()][pos.getColumn()];
     }
+
+    @Override
+    public String toString() {
+        String reserve = "";
+
+        for (int i = 0; i < animals.length; i++) {
+            for (int j = 0; j < animals[0].length; j++) {
+                reserve += "[" + animals[i][j] + "] ";
+            }
+            reserve += "\n";
+        }
+        return reserve;
+    }
+
 }

@@ -38,4 +38,9 @@ public class Coordinates {
         this.column = column;
     }
 
+    @Override
+    public String toString() {
+        return "[" + this.row + "," + this.column + "]";
+    }
+
 }

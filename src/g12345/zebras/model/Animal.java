@@ -38,4 +38,9 @@ public class Animal {
         this.color = color;
     }
 
+    @Override
+    public String toString() {
+        return this.species + " " + this.color;
+    }
+
 }
