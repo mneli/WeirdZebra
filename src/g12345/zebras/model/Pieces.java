@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class Pieces {
 
-    private List<Animal> animals;
+    private final List<Animal> animals;
 
     /**
      * Construct an instance of Pieces
@@ -56,7 +56,8 @@ public class Pieces {
      * @return an animal
      */
     public Animal getAnimal(Species species, Color color) {
-        return this.animals.remove(this.animals.indexOf(new Animal(species, color)));
+        int index = this.animals.indexOf(new Animal(species, color));
+        return index == -1 ? null : this.animals.remove(index);
     }
 
     /**
