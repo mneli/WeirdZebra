@@ -1,5 +1,6 @@
 package g12345.zebras.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,6 +15,8 @@ public class Pieces {
      * Construct an instance of Pieces
      */
     public Pieces() {
+
+        this.animals = new ArrayList<>();
 
         addAnimal(Species.GAZELLE, Color.RED, 6);
         addAnimal(Species.GAZELLE, Color.GREEN, 6);
@@ -52,7 +55,7 @@ public class Pieces {
      * @param species
      * @return an animal
      */
-    public Animal getAnimal(Color color, Species species) {
+    public Animal getAnimal(Species species, Color color) {
         return this.animals.remove(this.animals.indexOf(new Animal(species, color)));
     }
 
@@ -73,7 +76,7 @@ public class Pieces {
      * @param species
      * @return the number of animal matching the parameters
      */
-    public int getNbAnimals(Color color, Species species) {
+    public int getNbAnimals(Species species, Color color) {
         int nbOfAnimal = 0;
         Animal animalToFind = new Animal(species, color);
 
