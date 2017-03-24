@@ -50,11 +50,10 @@ public class Pieces {
      *
      * @param color
      * @param species
-     * @return
+     * @return an animal
      */
     public Animal getAnimal(Color color, Species species) {
-        //this.animals.remove(this.animals.indexOf(new Animal(species, color)));
-        return null;
+        return this.animals.remove(this.animals.indexOf(new Animal(species, color)));
     }
 
     /**
@@ -72,10 +71,17 @@ public class Pieces {
      *
      * @param color
      * @param species
-     * @return
+     * @return the number of animal matching the parameters
      */
     public int getNbAnimals(Color color, Species species) {
-        return 0;
+        int nbOfAnimal = 0;
+        Animal animalToFind = new Animal(species, color);
+
+        for (Animal animal : animals) {
+            if (animalToFind.equals(animal))
+                nbOfAnimal++;
+        }
+        return nbOfAnimal;
     }
 
 }
