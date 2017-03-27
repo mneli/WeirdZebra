@@ -251,30 +251,195 @@ public class ImpalaJonesTest {
      * Test of checkMove method, of class ImpalaJones.
      */
     @Test
-    public void testCheckMove() {
-        Reserve reserve = null;
-        int distance = 0;
+    public void testCheckMoveEmptyColumn() {
+        Reserve reserve = new Reserve();
+        int distance = 1;
         ImpalaJones instance = new ImpalaJones();
-        boolean expResult = false;
+        instance.init(0);
         boolean result = instance.checkMove(reserve, distance);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertTrue(result && instance.getPosition() == 0);
+    }
+
+    /**
+     * Test of checkMove method, of class ImpalaJones.
+     */
+    @Test
+    public void testCheckMoveHalfEmptyColumn() {
+        Reserve reserve = new Reserve();
+        int distance = 1;
+        ImpalaJones instance = new ImpalaJones();
+        instance.init(0);
+        Animal animal = new Animal(Species.GAZELLE, Color.RED);
+        reserve.put(animal, new Coordinates(0, 1));
+        reserve.put(animal, new Coordinates(1, 1));
+        reserve.put(animal, new Coordinates(2, 1));
+        boolean result = instance.checkMove(reserve, distance);
+        assertTrue(result && instance.getPosition() == 0);
+    }
+
+    /**
+     * Test of checkMove method, of class ImpalaJones.
+     */
+    @Test
+    public void testCheckMoveFullColumn() {
+        Reserve reserve = new Reserve();
+        int distance = 1;
+        ImpalaJones instance = new ImpalaJones();
+        instance.init(0);
+        Animal animal = new Animal(Species.GAZELLE, Color.RED);
+        reserve.put(animal, new Coordinates(0, 1));
+        reserve.put(animal, new Coordinates(1, 1));
+        reserve.put(animal, new Coordinates(2, 1));
+        reserve.put(animal, new Coordinates(3, 1));
+        reserve.put(animal, new Coordinates(4, 1));
+        boolean result = instance.checkMove(reserve, distance);
+        assertTrue(!result && instance.getPosition() == 0);
+    }
+
+    /**
+     * Test of checkMove method, of class ImpalaJones.
+     */
+    @Test
+    public void testCheckMoveEmptyRow() {
+        Reserve reserve = new Reserve();
+        int distance = 2;
+        ImpalaJones instance = new ImpalaJones();
+        instance.init(5);
+        boolean result = instance.checkMove(reserve, distance);
+        assertTrue(result && instance.getPosition() == 5);
+    }
+
+    /**
+     * Test of checkMove method, of class ImpalaJones.
+     */
+    @Test
+    public void testCheckMoveHalfEmptyRow() {
+        Reserve reserve = new Reserve();
+        int distance = 1;
+        ImpalaJones instance = new ImpalaJones();
+        instance.init(16);
+        Animal animal = new Animal(Species.GAZELLE, Color.RED);
+        reserve.put(animal, new Coordinates(4, 0));
+        reserve.put(animal, new Coordinates(4, 1));
+        reserve.put(animal, new Coordinates(4, 2));
+        boolean result = instance.checkMove(reserve, distance);
+        assertTrue(result && instance.getPosition() == 16);
+    }
+
+    /**
+     * Test of checkMove method, of class ImpalaJones.
+     */
+    @Test
+    public void testCheckMoveFullRow() {
+        Reserve reserve = new Reserve();
+        int distance = 1;
+        ImpalaJones instance = new ImpalaJones();
+        instance.init(16);
+        Animal animal = new Animal(Species.GAZELLE, Color.RED);
+        reserve.put(animal, new Coordinates(4, 0));
+        reserve.put(animal, new Coordinates(4, 1));
+        reserve.put(animal, new Coordinates(4, 2));
+        reserve.put(animal, new Coordinates(4, 3));
+        reserve.put(animal, new Coordinates(4, 4));
+        reserve.put(animal, new Coordinates(4, 5));
+        boolean result = instance.checkMove(reserve, distance);
+        assertTrue(!result && instance.getPosition() == 16);
     }
 
     /**
      * Test of valid method, of class ImpalaJones.
      */
     @Test
-    public void testValid() {
-        System.out.println("valid");
-        Coordinates pos = null;
+    public void testValidImpalaUp() {
+        Coordinates pos = new Coordinates(2, 2);
         ImpalaJones instance = new ImpalaJones();
-        boolean expResult = false;
+        instance.init(2);
         boolean result = instance.valid(pos);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertTrue(result);
+    }
+
+    /**
+     * Test of valid method, of class ImpalaJones.
+     */
+    @Test
+    public void testValidImpalaDown() {
+        Coordinates pos = new Coordinates(2, 2);
+        ImpalaJones instance = new ImpalaJones();
+        instance.init(14);
+        boolean result = instance.valid(pos);
+        assertTrue(result);
+    }
+
+    /**
+     * Test of valid method, of class ImpalaJones.
+     */
+    @Test
+    public void testValidImpalaLeft() {
+        Coordinates pos = new Coordinates(2, 2);
+        ImpalaJones instance = new ImpalaJones();
+        instance.init(19);
+        boolean result = instance.valid(pos);
+        assertTrue(result);
+    }
+
+    /**
+     * Test of valid method, of class ImpalaJones.
+     */
+    @Test
+    public void testValidImpalaRight() {
+        Coordinates pos = new Coordinates(2, 2);
+        ImpalaJones instance = new ImpalaJones();
+        instance.init(8);
+        boolean result = instance.valid(pos);
+        assertTrue(result);
+    }
+
+    /**
+     * Test of valid method, of class ImpalaJones.
+     */
+    @Test
+    public void testValidImpalaUpFalse() {
+        Coordinates pos = new Coordinates(2, 2);
+        ImpalaJones instance = new ImpalaJones();
+        instance.init(1);
+        boolean result = instance.valid(pos);
+        assertFalse(result);
+    }
+
+    /**
+     * Test of valid method, of class ImpalaJones.
+     */
+    @Test
+    public void testValidImpalaDownFalse() {
+        Coordinates pos = new Coordinates(2, 2);
+        ImpalaJones instance = new ImpalaJones();
+        instance.init(13);
+        boolean result = instance.valid(pos);
+        assertFalse(result);
+    }
+
+    /**
+     * Test of valid method, of class ImpalaJones.
+     */
+    @Test
+    public void testValidImpalaLeftFalse() {
+        Coordinates pos = new Coordinates(2, 2);
+        ImpalaJones instance = new ImpalaJones();
+        instance.init(20);
+        boolean result = instance.valid(pos);
+        assertFalse(result);
+    }
+
+    /**
+     * Test of valid method, of class ImpalaJones.
+     */
+    @Test
+    public void testValidImpalaRightFalse() {
+        Coordinates pos = new Coordinates(2, 2);
+        ImpalaJones instance = new ImpalaJones();
+        instance.init(9);
+        boolean result = instance.valid(pos);
+        assertFalse(result);
     }
 
     /**
@@ -282,14 +447,31 @@ public class ImpalaJonesTest {
      */
     @Test
     public void testFindFirst() {
-        System.out.println("findFirst");
-        Reserve reserve = null;
+        Reserve reserve = new Reserve();
         ImpalaJones instance = new ImpalaJones();
-        int expResult = 0;
+        instance.init(0);
+        int expResult = 1;
         int result = instance.findFirst(reserve);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of findFirst method, of class ImpalaJones.
+     */
+    @Test
+    public void testFindFirst2() {
+        Reserve reserve = new Reserve();
+        ImpalaJones instance = new ImpalaJones();
+        instance.init(0);
+        Animal animal = new Animal(Species.GAZELLE, Color.RED);
+        reserve.put(animal, new Coordinates(0, 1));
+        reserve.put(animal, new Coordinates(1, 1));
+        reserve.put(animal, new Coordinates(2, 1));
+        reserve.put(animal, new Coordinates(3, 1));
+        reserve.put(animal, new Coordinates(4, 1));
+        int expResult = 2;
+        int result = instance.findFirst(reserve);
+        assertEquals(expResult, result);
     }
 
 }
