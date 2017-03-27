@@ -40,8 +40,8 @@ public class ImpalaJones {
      * @param distance the amount of steps Impala Jones should make
      */
     public void move(int distance) {
-        this.position += distance + 21;
-        this.position %= 21;
+        this.position += distance + 22;
+        this.position %= 22;
     }
 
     /**
