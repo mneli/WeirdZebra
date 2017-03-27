@@ -22,7 +22,7 @@ public class ImpalaJones {
     }
 
     /**
-     * Put Impala Jones at his initial position.
+     * Put Impala Jones at an initial position.
      *
      * @param nb the initial position. Must be between 0 and 21.
      */
@@ -40,7 +40,7 @@ public class ImpalaJones {
      * @param distance the amount of steps Impala Jones should make
      */
     public void move(int distance) {
-        this.position += distance;
+        this.position += distance + 21;
         this.position %= 21;
     }
 
@@ -106,15 +106,60 @@ public class ImpalaJones {
         return 21 - this.position;
     }
 
+    /**
+     * Check if the movement of Impala Jones is permitted. A movement is
+     * permitted only if the row or the column in front of which Impala Jones
+     * stands after the movement has at least one free spot.
+     *
+     * @param reserve
+     * @param distance must be positive
+     * @return
+     */
     public boolean checkMove(Reserve reserve, int distance) {
-        return false;
+        int row, column;
+        move(distance);
+
+        if (getColumn() == -1) {
+            row = getRow();
+            column = 0;
+            while (column < 6 && !reserve.isFree(new Coordinates(row, column))) {
+                column++;
+            }
+            move(-distance);
+            return column < 6;
+        }
+
+        row = 0;
+        column = getColumn();
+        while (row < 5 && !reserve.isFree(new Coordinates(row, column))) {
+            row++;
+        }
+        move(-distance);
+        return row < 5;
     }
 
+    /**
+     * Check if the position choose by the player to put his animal is a valid
+     * coordinate.
+     *
+     * @param pos
+     * @return
+     */
     public boolean valid(Coordinates pos) {
-        return false;
+        return getColumn() == -1 ? pos.getRow() == getRow() : pos.getColumn() == getColumn();
     }
 
+    /**
+     * Return the smallest movement possible for Impala Jones.
+     *
+     * @param reserve
+     * @return -1 if no more moves possible for Impala Jones.
+     */
     public int findFirst(Reserve reserve) {
-        return 0;
+        int distance = 1;
+        while (distance < 22 && !checkMove(reserve, distance)) {
+            distance++;
+        }
+        return distance == 22 ? -1 : distance;
     }
 }

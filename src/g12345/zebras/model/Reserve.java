@@ -39,7 +39,7 @@ public class Reserve {
      * Get the animal from the reserve in the given position
      *
      * @param pos
-     * @return
+     * @return null if the position is not occupied
      */
     public Animal getAnimal(Coordinates pos) {
         return this.animals[pos.getRow()][pos.getColumn()];
