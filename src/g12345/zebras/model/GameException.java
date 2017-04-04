@@ -6,7 +6,7 @@ package g12345.zebras.model;
  * @group Expression group is undefined on line 13, column 13 in
  * Templates/Classes/Exception.java.
  */
-public class GameException extends Exception {
+public class GameException extends RuntimeException {
 
     private static final long serialVersionUID = 1L;
 
