@@ -13,8 +13,8 @@ public class Game implements Model {
     private final Reserve reserve;
     private final ImpalaJones impala;
     private final Pieces pieces;
-    private final GameStatus status;
-    private final int currentPlayer;
+    private GameStatus status;
+    private int currentPlayer;
 
     public Game() {
 
@@ -52,6 +52,7 @@ public class Game implements Model {
         if (this.status != GameStatus.INIT)
             throw new GameException();
         this.impala.init(position);
+        this.status = GameStatus.ANIMAL;
     }
 
     /**
@@ -78,6 +79,7 @@ public class Game implements Model {
                         getCurrentColor()) == 0)
             throw new GameException();
         this.reserve.put(this.pieces.getAnimal(species, getCurrentColor()), position);
+        this.status = GameStatus.IMPALA;
     }
 
     /**
@@ -98,6 +100,9 @@ public class Game implements Model {
                 || distance < 1 || distance > 21)
             throw new GameException();
         this.impala.move(distance);
+        this.currentPlayer++;
+        this.currentPlayer %= 2;
+        this.status = GameStatus.ANIMAL;
     }
 
     /**
