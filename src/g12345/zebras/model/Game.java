@@ -9,12 +9,12 @@ import java.util.List;
  */
 public class Game implements Model {
 
-    private List<Player> players;
-    private Reserve reserve;
-    private ImpalaJones impala;
-    private Pieces pieces;
-    private GameStatus gameStatus;
-    private int currentPlayer;
+    private final List<Player> players;
+    private final Reserve reserve;
+    private final ImpalaJones impala;
+    private final Pieces pieces;
+    private final GameStatus status;
+    private final int currentPlayer;
 
     public Game() {
 
@@ -28,7 +28,7 @@ public class Game implements Model {
 
         this.pieces = new Pieces();
 
-        this.gameStatus = GameStatus.INIT;
+        this.status = GameStatus.INIT;
 
         this.currentPlayer = 0;
     }
@@ -38,7 +38,7 @@ public class Game implements Model {
      */
     @Override
     public void start() {
-
+        //TODO
     }
 
     /**
@@ -49,7 +49,9 @@ public class Game implements Model {
      */
     @Override
     public void setImpalaJonesFirstPosition(int position) {
-        throw new GameException();
+        if (this.status != GameStatus.INIT)
+            throw new GameException();
+        this.impala.init(position);
     }
 
     /**
@@ -69,7 +71,13 @@ public class Game implements Model {
      */
     @Override
     public void putAnimal(Coordinates position, Species species) {
-        throw new GameException();
+        if (this.status != GameStatus.ANIMAL
+                || !this.impala.valid(position)
+                || !this.reserve.isFree(position)
+                || this.pieces.getNbAnimals(species,
+                        getCurrentColor()) == 0)
+            throw new GameException();
+        this.reserve.put(this.pieces.getAnimal(species, getCurrentColor()), position);
     }
 
     /**
@@ -85,7 +93,11 @@ public class Game implements Model {
      */
     @Override
     public void moveImpalaJones(int distance) {
-        throw new GameException();
+        if (this.status != GameStatus.IMPALA
+                || !this.impala.checkMove(this.reserve, distance)
+                || distance < 1 || distance > 21)
+            throw new GameException();
+        this.impala.move(distance);
     }
 
     /**
@@ -95,6 +107,7 @@ public class Game implements Model {
      */
     @Override
     public boolean isOver() {
+        return !this.pieces.hasAvailable();
     }
 
     /**
@@ -104,6 +117,7 @@ public class Game implements Model {
      */
     @Override
     public GameStatus getStatus() {
+        return this.status;
     }
 
     /**
@@ -113,6 +127,7 @@ public class Game implements Model {
      */
     @Override
     public Color getCurrentColor() {
+        return this.players.get(this.currentPlayer).getColor();
     }
 
     /**
@@ -122,6 +137,7 @@ public class Game implements Model {
      */
     @Override
     public List<Player> getPlayers() {
+        return this.players;
     }
 
     /**
@@ -131,6 +147,7 @@ public class Game implements Model {
      */
     @Override
     public Reserve getReserve() {
+        return this.reserve;
     }
 
     /**
@@ -143,6 +160,7 @@ public class Game implements Model {
      */
     @Override
     public int getNb(Species species) {
+        return this.pieces.getNbAnimals(species, getCurrentColor());
     }
 
     /**
@@ -152,6 +170,7 @@ public class Game implements Model {
      */
     @Override
     public ImpalaJones getImpalaJones() {
+        return this.impala;
     }
 
     /**
@@ -162,6 +181,8 @@ public class Game implements Model {
      */
     @Override
     public int getScore(Color color) {
+        //TODO
+        return 0;
     }
 
 }
