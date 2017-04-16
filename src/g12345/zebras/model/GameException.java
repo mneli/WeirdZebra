@@ -14,7 +14,7 @@ public class GameException extends RuntimeException {
      * Creates a new instance of <code>GameException</code> without detail
      * message.
      */
-    public GameException() {
+    GameException() {
     }
 
     /**
@@ -23,7 +23,7 @@ public class GameException extends RuntimeException {
      *
      * @param msg the detail message.
      */
-    public GameException(String msg) {
+    GameException(String msg) {
         super(msg);
     }
 }
