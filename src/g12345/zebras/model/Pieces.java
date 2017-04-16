@@ -18,16 +18,11 @@ public class Pieces {
 
         this.animals = new ArrayList<>();
 
-        addAnimal(Species.GAZELLE, Color.RED, 6);
-        addAnimal(Species.GAZELLE, Color.GREEN, 6);
-        addAnimal(Species.ZEBRA, Color.RED, 5);
-        addAnimal(Species.ZEBRA, Color.GREEN, 5);
-        addAnimal(Species.CROCODILE, Color.RED, 2);
-        addAnimal(Species.CROCODILE, Color.GREEN, 2);
-        addAnimal(Species.LION, Color.RED, 1);
-        addAnimal(Species.LION, Color.GREEN, 1);
-        addAnimal(Species.ELEPHANT, Color.RED, 1);
-        addAnimal(Species.ELEPHANT, Color.GREEN, 1);
+        addAnimal(Species.GAZELLE, 6);
+        addAnimal(Species.ZEBRA, 5);
+        addAnimal(Species.CROCODILE, 2);
+        addAnimal(Species.LION, 1);
+        addAnimal(Species.ELEPHANT, 1);
 
     }
 
@@ -36,13 +31,13 @@ public class Pieces {
      * constructor to populate the stock
      *
      * @param species
-     * @param color
      * @param qte quantity of animal to add
      */
-    private void addAnimal(Species species, Color color, int qte) {
+    private void addAnimal(Species species, int qte) {
         int i = 0;
         while (i < qte) {
-            this.animals.add(new Animal(species, color));
+            this.animals.add(new Animal(species, Color.GREEN));
+            this.animals.add(new Animal(species, Color.RED));
             i++;
         }
     }

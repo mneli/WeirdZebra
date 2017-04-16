@@ -1,5 +1,6 @@
 package g12345.zebras.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,6 +17,20 @@ public class Game implements Model {
     private int currentPlayer;
 
     public Game() {
+
+        this.players = new ArrayList<>(2);
+        players.add(new Player(Color.RED));
+        players.add(new Player(Color.GREEN));
+
+        this.reserve = new Reserve();
+
+        this.impala = new ImpalaJones();
+
+        this.pieces = new Pieces();
+
+        this.gameStatus = GameStatus.INIT;
+
+        this.currentPlayer = 0;
     }
 
     /**
@@ -23,7 +38,7 @@ public class Game implements Model {
      */
     @Override
     public void start() {
-        throw new GameException();
+
     }
 
     /**
@@ -80,7 +95,6 @@ public class Game implements Model {
      */
     @Override
     public boolean isOver() {
-        throw new GameException();
     }
 
     /**
@@ -90,7 +104,6 @@ public class Game implements Model {
      */
     @Override
     public GameStatus getStatus() {
-        throw new GameException();
     }
 
     /**
@@ -100,7 +113,6 @@ public class Game implements Model {
      */
     @Override
     public Color getCurrentColor() {
-        throw new GameException();
     }
 
     /**
@@ -110,7 +122,6 @@ public class Game implements Model {
      */
     @Override
     public List<Player> getPlayers() {
-        throw new GameException();
     }
 
     /**
@@ -120,7 +131,6 @@ public class Game implements Model {
      */
     @Override
     public Reserve getReserve() {
-        throw new GameException();
     }
 
     /**
@@ -133,7 +143,6 @@ public class Game implements Model {
      */
     @Override
     public int getNb(Species species) {
-        throw new GameException();
     }
 
     /**
@@ -143,7 +152,6 @@ public class Game implements Model {
      */
     @Override
     public ImpalaJones getImpalaJones() {
-        throw new GameException();
     }
 
     /**
@@ -154,7 +162,6 @@ public class Game implements Model {
      */
     @Override
     public int getScore(Color color) {
-        throw new GameException();
     }
 
 }

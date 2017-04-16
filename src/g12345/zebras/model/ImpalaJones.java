@@ -86,11 +86,11 @@ public class ImpalaJones {
      * @return -1 if Impala Jones is at the left or right border of the board.
      */
     public int getColumn() {
-        if (isLeft() || isRight())
-            return -1;
         if (isUp())
             return this.position;
-        return 16 - this.position;
+        if (isDown())
+            return 16 - this.position;
+        return -1;
     }
 
     /**
