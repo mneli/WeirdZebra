@@ -1,5 +1,8 @@
 package g12345.zebras.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author g12345
@@ -43,6 +46,39 @@ public class Reserve {
      */
     public Animal getAnimal(Coordinates pos) {
         return this.animals[pos.getRow()][pos.getColumn()];
+    }
+
+    /**
+     * Get the list of vertically and horizontally adjacent coordinates of a
+     * given coordinates.
+     *
+     * @param position the coordinate
+     * @return a list of valid adjacent coordinates
+     */
+    public List<Coordinates> getAdjacents(Coordinates position) {
+        List<Coordinates> adjacents = new ArrayList<>();
+
+        addAdjacent(adjacents, new Coordinates(position.getRow(), position.getColumn() - 1));
+        addAdjacent(adjacents, new Coordinates(position.getRow(), position.getColumn() + 1));
+        addAdjacent(adjacents, new Coordinates(position.getRow() - 1, position.getColumn()));
+        addAdjacent(adjacents, new Coordinates(position.getRow() + 1, position.getColumn()));
+        return adjacents;
+    }
+
+    /**
+     * Check if the given coordinate is valid before adding it to the adjacents
+     * list.
+     *
+     * @param adjacents the list of adjacent coordinates given by the
+     * getAdjacents method
+     * @param position the coordinate to add
+     */
+    private void addAdjacent(List<Coordinates> adjacents, Coordinates position) {
+        if (position.getRow() >= 0
+                && position.getRow() < this.animals.length
+                && position.getColumn() >= 0
+                && position.getColumn() < this.animals[0].length)
+            adjacents.add(position);
     }
 
     @Override
