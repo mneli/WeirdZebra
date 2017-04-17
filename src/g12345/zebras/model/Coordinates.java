@@ -39,6 +39,26 @@ public class Coordinates {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+
+        if (!(o instanceof Coordinates))
+            return false;
+
+        Coordinates c = (Coordinates) o;
+        return (this.row == c.row && this.column == c.column);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 43 * hash + this.row;
+        hash = 43 * hash + this.column;
+        return hash;
+    }
+
+    @Override
     public String toString() {
         return "[" + this.row + "," + this.column + "]";
     }
