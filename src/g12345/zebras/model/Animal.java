@@ -10,6 +10,7 @@ public class Animal {
 
     private final Species species;
     private final Color color;
+    private AnimalState state;
 
     /**
      * Get the value of species
@@ -30,6 +31,24 @@ public class Animal {
     }
 
     /**
+     * Get the value of state
+     *
+     * @return the value of state
+     */
+    public AnimalState getState() {
+        return state;
+    }
+
+    /**
+     * Set the value of state
+     *
+     * @param state new value of state
+     */
+    public void setState(AnimalState state) {
+        this.state = state;
+    }
+
+    /**
      * Construct an instance of Animal
      *
      * @param species
@@ -38,6 +57,37 @@ public class Animal {
     public Animal(Species species, Color color) {
         this.species = species;
         this.color = color;
+        this.state = AnimalState.REST;
+    }
+
+    public void action(Animal other) {
+        switch (this.species) {
+            case LION:
+                switch (other.species) {
+                    case GAZELLE:
+                        other.setState(AnimalState.RUN);
+                        //the player have to take back the other gazelle
+                        break;
+                    case ZEBRA:
+                        other.setState(AnimalState.HIDDEN);
+                        break;
+                    default:
+                }
+                break;
+            case ZEBRA:
+            case GAZELLE:
+                switch (other.species) {
+                    case LION:
+                        this.state = AnimalState.HIDDEN;
+                        break;
+                    default:
+                }
+                break;
+            case CROCODILE:
+                //TODO
+                break;
+            default:
+        }
     }
 
     @Override
