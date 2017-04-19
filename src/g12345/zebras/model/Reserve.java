@@ -49,6 +49,20 @@ public class Reserve {
     }
 
     /**
+     * Remove an animal at the given coordinates. The given position is set to
+     * null afterwards
+     *
+     * @param pos the coordinates where to remove the animal
+     * @return the animal removed. Can be null if the coordinates indicate an
+     * empty position in the reserve
+     */
+    public Animal remove(Coordinates pos) {
+        Animal removedAnimal = getAnimal(pos);
+        this.animals[pos.getRow()][pos.getColumn()] = null;
+        return removedAnimal;
+    }
+
+    /**
      * Get the list of vertically and horizontally adjacent coordinates of a
      * given coordinates.
      *

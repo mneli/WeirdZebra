@@ -56,6 +56,18 @@ public class Pieces {
     }
 
     /**
+     * Put back an animal inside the stock changing it's state to REST
+     *
+     * @param animal the animal to put back
+     */
+    public void putBackAnimal(Animal animal) {
+        if (animal != null) {
+            animal.setState(AnimalState.REST);
+            this.animals.add(animal);
+        }
+    }
+
+    /**
      * Check if there's any animal left in stock.
      *
      * @return true if the stock is not empty

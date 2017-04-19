@@ -76,10 +76,40 @@ public class Game implements Model {
                 || !this.impala.valid(position)
                 || !this.reserve.isFree(position)
                 || this.pieces.getNbAnimals(species,
-                        getCurrentColor()) == 0)
+                        getCurrentColor()) == 0) {
             throw new GameException();
+        }
+
         this.reserve.put(this.pieces.getAnimal(species, getCurrentColor()), position);
+
+        manageAdjPositions(this.reserve.getAdjacents(position),
+                this.reserve.getAnimal(position));
+
         this.status = GameStatus.IMPALA;
+    }
+
+    /**
+     * Run through the adjacent positions and manage their state according to
+     * the animal received in parameter. Put animal back to the stock if their
+     * state is RUN
+     *
+     * @param adjacents the list of adjacent positions
+     * @param centerAnimal the newly placed animal according to which the other
+     * animal's state have to change
+     */
+    private void manageAdjPositions(List<Coordinates> adjacents, Animal centerAnimal) {
+        Animal adjacentAnimal;
+        for (Coordinates adjacentPos : adjacents) {
+
+            if (!this.reserve.isFree(adjacentPos)) {
+                adjacentAnimal = this.reserve.getAnimal(adjacentPos);
+                centerAnimal.action(adjacentAnimal);
+
+                if (adjacentAnimal.getState() == AnimalState.RUN) {
+                    this.pieces.putBackAnimal(this.reserve.remove(adjacentPos));
+                }
+            }
+        }
     }
 
     /**
