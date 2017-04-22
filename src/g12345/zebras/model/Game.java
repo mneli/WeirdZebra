@@ -130,9 +130,15 @@ public class Game implements Model {
                 || distance < 1 || distance > 21)
             throw new GameException();
         this.impala.move(distance);
+        nextPlayer();
+        if (!this.pieces.hasAvailable(getCurrentColor()))
+            nextPlayer();
+        this.status = GameStatus.ANIMAL;
+    }
+
+    private void nextPlayer() {
         this.currentPlayer++;
         this.currentPlayer %= 2;
-        this.status = GameStatus.ANIMAL;
     }
 
     /**
