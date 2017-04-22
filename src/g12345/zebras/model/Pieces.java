@@ -77,6 +77,22 @@ public class Pieces {
     }
 
     /**
+     * Check if there's any animal left of the color given in parameter in
+     * stock.
+     *
+     * @param color
+     * @return
+     */
+    public boolean hasAvailable(Color color) {
+        int index = 0;
+        int listSize = this.animals.size();
+        while (index < listSize && this.animals.get(index).getColor() != color) {
+            index++;
+        }
+        return index < listSize;
+    }
+
+    /**
      * Gives the quantity of animal left in the stock which matches the color
      * and the species given in parameter
      *
