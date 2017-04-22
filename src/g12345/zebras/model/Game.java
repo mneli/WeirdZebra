@@ -136,6 +136,9 @@ public class Game implements Model {
         this.status = GameStatus.ANIMAL;
     }
 
+    /**
+     * Switch to the next player
+     */
     private void nextPlayer() {
         this.currentPlayer++;
         this.currentPlayer %= 2;

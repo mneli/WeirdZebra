@@ -110,4 +110,66 @@ public class PiecesTest {
         assertTrue(instance.getNbAnimals(species, color) == 0);
     }
 
+    /**
+     * Test of hasAvailable method, of class Pieces.
+     */
+    @Test
+    public void testHasAvailable_Color1() {
+        Pieces instance = new Pieces();
+
+        for (int i = 0; i < 6; i++) {
+            instance.getAnimal(Species.GAZELLE, Color.RED);
+            instance.getAnimal(Species.GAZELLE, Color.GREEN);
+            if (i < 5) {
+                instance.getAnimal(Species.ZEBRA, Color.RED);
+                instance.getAnimal(Species.ZEBRA, Color.GREEN);
+            }
+            if (i < 2) {
+                instance.getAnimal(Species.CROCODILE, Color.RED);
+                instance.getAnimal(Species.CROCODILE, Color.GREEN);
+            }
+            if (i < 1) {
+                instance.getAnimal(Species.LION, Color.RED);
+                instance.getAnimal(Species.LION, Color.GREEN);
+                instance.getAnimal(Species.ELEPHANT, Color.RED);
+                //instance.getAnimal(Species.ELEPHANT, Color.GREEN);
+            }
+        }
+
+        Color color = Color.GREEN;
+        boolean result = instance.hasAvailable(color);
+        assertTrue(result);
+    }
+
+    /**
+     * Test of hasAvailable method, of class Pieces.
+     */
+    @Test
+    public void testHasAvailable_Color2() {
+        Pieces instance = new Pieces();
+
+        for (int i = 0; i < 6; i++) {
+            instance.getAnimal(Species.GAZELLE, Color.RED);
+            instance.getAnimal(Species.GAZELLE, Color.GREEN);
+            if (i < 5) {
+                instance.getAnimal(Species.ZEBRA, Color.RED);
+                instance.getAnimal(Species.ZEBRA, Color.GREEN);
+            }
+            if (i < 2) {
+                instance.getAnimal(Species.CROCODILE, Color.RED);
+                instance.getAnimal(Species.CROCODILE, Color.GREEN);
+            }
+            if (i < 1) {
+                instance.getAnimal(Species.LION, Color.RED);
+                instance.getAnimal(Species.LION, Color.GREEN);
+                //instance.getAnimal(Species.ELEPHANT, Color.RED);
+                instance.getAnimal(Species.ELEPHANT, Color.GREEN);
+            }
+        }
+
+        Color color = Color.GREEN;
+        boolean result = instance.hasAvailable(color);
+        assertFalse(result);
+    }
+
 }
